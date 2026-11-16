@@ -35,13 +35,13 @@
                                                                                                     nodejs
                                                                                                     pkgs.git
                                                                                                     (
-                                                                                                        config.tree-serialization
+                                                                                                        config.tree-serialization.explode
                                                                                                             {
                                                                                                                 bytes = 1048576 ;
                                                                                                                 input = "./node-modules" ;
                                                                                                                 name = "explode" ;
                                                                                                                 output = "./node-modules.exploded" ;
-                                                                                                            }.explode
+                                                                                                            }
                                                                                                     )
                                                                                                 ] ;
                                                                                         text =
