@@ -41,7 +41,7 @@
                                                                                                                 input = "./node-modules" ;
                                                                                                                 name = "explode" ;
                                                                                                                 output = "./node-modules.exploded" ;
-                                                                                                            }
+                                                                                                            }.explode
                                                                                                     )
                                                                                                 ] ;
                                                                                         text =
