@@ -35,7 +35,7 @@
                                                                                                     nodejs
                                                                                                     pkgs.git
                                                                                                     (
-                                                                                                        config.tree-serialization.explode
+                                                                                                        config.tree-serialization.explode ###
                                                                                                             {
                                                                                                                 bytes = 1048576 ;
                                                                                                                 input = "./node-modules" ;
