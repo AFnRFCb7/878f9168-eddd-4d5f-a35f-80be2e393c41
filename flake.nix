@@ -13,6 +13,7 @@
                                         in
                                             with identified ;
                                                 {
+                                                    config.environment.sessionVariables.THE_ANSWER = config.lazy-node-packager { nodejs = pkgs.nodejs_22 ; } ;
                                                     options =
                                                         {
                                                             lazy-node-packager =
