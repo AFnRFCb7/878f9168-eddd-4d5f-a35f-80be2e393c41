@@ -1,0 +1,1 @@
+/nix/store/dslcdvai2vk44cj16z77z4sys3n9mjs1-package/bin/package

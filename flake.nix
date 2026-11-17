@@ -23,10 +23,7 @@
                                                                             { nodejs } :
                                                                                 config.lazy-shell-application
                                                                                     {
-                                                                                        mounts =
-                                                                                            {
-                                                                                                out = { source = "$out" ; type = "bind" ; } ;
-                                                                                            } ;
+                                                                                        mounts = { pwd = { source = "." ; type = "bind" ; } ; } ;
                                                                                         name = "package" ;
                                                                                         post = [ ] ;
                                                                                         runtime-inputs =
@@ -37,10 +34,10 @@
                                                                                                     (
                                                                                                         config.tree-serialization.explode ###
                                                                                                             {
-                                                                                                                bytes = 1048576 ;
-                                                                                                                input = "./node-modules" ;
+                                                                                                                bytes = "1M" ;
+                                                                                                                input = "/mounts/pwd/node_modules" ;
                                                                                                                 name = "explode" ;
-                                                                                                                output = "./node-modules.exploded" ;
+                                                                                                                output = "/mounts/pwd/node_modules.exploded" ;
                                                                                                             }
                                                                                                     )
                                                                                                 ] ;
@@ -52,9 +49,11 @@
                                                                                                 fi
                                                                                                 NAME="$1"
                                                                                                 VERSION_SPECIFICATION="$2"
+                                                                                                git rm -r node_modules.exploded || rm -rf node_modules.exploded
+                                                                                                git rm -r node_modules || rm -rf node_modules
                                                                                                 npm install "$NAME@$VERSION_SPECIFICATION"
                                                                                                 explode
-                                                                                                git rm node_modules
+                                                                                                git rm -r node_modules
                                                                                                 git add node_modules.exploded
                                                                                             '' ;
                                                                                         variables = { } ;
