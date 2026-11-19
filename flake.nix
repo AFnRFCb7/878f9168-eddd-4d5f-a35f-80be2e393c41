@@ -53,7 +53,7 @@
                                                                                                 git rm -r node_modules || rm -rf node_modules
                                                                                                 npm install "$NAME@$VERSION_SPECIFICATION"
                                                                                                 explode
-                                                                                                git rm -r node_modules
+                                                                                                git rm -r node_modules || rm -rf node_modules
                                                                                                 git add node_modules.exploded
                                                                                             '' ;
                                                                                         variables = { } ;
