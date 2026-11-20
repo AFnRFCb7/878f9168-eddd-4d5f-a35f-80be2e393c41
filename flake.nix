@@ -13,6 +13,8 @@
                                         in
                                             with identified ;
                                                 {
+                                                    config.environment.sessionVariables.TEMPORARY1 = config.nodejs.fetchers.db-migrate ;
+                                                    config.environment.sessionVariables.TEMPORARY2 = config.nodejs.fetchers.db-migrate-pg ;
                                                     options.nodejs =
                                                         {
                                                             fetch =
