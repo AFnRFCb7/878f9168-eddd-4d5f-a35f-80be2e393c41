@@ -21,7 +21,7 @@
                                                                 {
                                                                     default =
                                                                         { name , nodejs , version-spec } :
-                                                                            config.nodejs.fetch
+                                                                            config.lazy-shell-application
                                                                                 {
                                                                                     mounts = { pwd = { source = "." ; type = "bind" ; } ; } ;
                                                                                     name = "package" ;
