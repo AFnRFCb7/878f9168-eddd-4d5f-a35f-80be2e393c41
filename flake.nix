@@ -69,7 +69,7 @@
                                                                                                 (
                                                                                                     config.tree-serialization.implode
                                                                                                         {
-                                                                                                            input = "${ exploded }/node_modules.exploded ;
+                                                                                                            input = "${ exploded }/node_modules.exploded" ;
                                                                                                             name = "implode" ;
                                                                                                             output = "$OUT" ;
                                                                                                         }
