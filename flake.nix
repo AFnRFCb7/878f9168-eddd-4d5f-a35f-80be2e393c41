@@ -30,7 +30,7 @@
                                                                                                 nodejs
                                                                                                 pkgs.git
                                                                                                 (
-                                                                                                    config.tree-serialization.explode ###
+                                                                                                    config.tree-serialization.explode
                                                                                                         {
                                                                                                             bytes = "1M" ;
                                                                                                             input = "/mounts/pwd/node_modules" ;
@@ -41,7 +41,7 @@
                                                                                             ] ;
                                                                                     text =
                                                                                         ''
-                                                                                            if [[ "$#" -ne 2 ]]
+                                                                                            if [[ "$#" -ne 0 ]]
                                                                                             then
                                                                                                 failure 6437861303491491 ${ name } ${ nodejs } ${ version-spec }"$@"
                                                                                             fi
@@ -60,30 +60,26 @@
                                                                 lib.mkOption
                                                                     {
                                                                         default =
-                                                                            { name , nodejs , version-spec } :
-                                                                            {
-                                                                                check = null ;
-                                                                                checks = [ ] ;
-                                                                                implementation =
+                                                                            { exploded } :
+                                                                                pkgs.runCommand
+                                                                                    "node-package"
                                                                                     {
-                                                                                        options.nodejs =
-                                                                                            {
-                                                                                                fetchers.${ nodejs }.${ name }.${ version-spec } =
-                                                                                                    lib.mkOption
+                                                                                        nativeBuildInputs =
+                                                                                            [
+                                                                                                (
+                                                                                                    config.tree-serialization.implode
                                                                                                         {
-                                                                                                            default = config.nodejs.fetch { name = name ; nodejs = nodejs ; version-spec = version-spec ; } ;
-                                                                                                            type = lib.types.package ;
-                                                                                                        } ;
-                                                                                                packages.${ nodejs }.${ name }.${ version-spec } =
-                                                                                                    lib.mkOption
-                                                                                                        {
-                                                                                                            default = config.nodejs.package { name = name ; nodejs = nodejs ; version-spec = version-spec ; } ;
-                                                                                                            type = lib.types.package ;
-                                                                                                        } ;
-                                                                                            } ;
-                                                                                    } ;
-                                                                                imports = { } ;
-                                                                            } ;
+                                                                                                            input = "${ exploded }/node_modules.exploded ;
+                                                                                                            name = "implode" ;
+                                                                                                            output = "$OUT" ;
+                                                                                                        }
+                                                                                                )
+                                                                                            ] ;
+                                                                                    }
+                                                                                    ''
+                                                                                        export OUT="$out"
+                                                                                        implode
+                                                                                    '' ;
                                                                         type = lib.types.functionTo lib.types.package ;
                                                                     } ;
                                                         } ;
