@@ -44,10 +44,6 @@
                                                                                                 ] ;
                                                                                         text =
                                                                                             ''
-                                                                                                if [[ "$#" -ne 0 ]]
-                                                                                                then
-                                                                                                    failure 6437861303491491 ${ name } ${ nodejs } ${ version-spec }"$@"
-                                                                                                fi
                                                                                                 git rm -r node_modules.exploded || rm -rf node_modules.exploded
                                                                                                 git rm -r node_modules || rm -rf node_modules
                                                                                                 npm install "${ name }@${ version-spec }" --prefix "node_modules/${ nodejs }/${ name }/${ version-spec }"
