@@ -21,7 +21,7 @@
                                                                 lib.mkOption
                                                                     {
                                                                         default =
-                                                                            { name , nodejs , version-spec } :
+                                                                            { garble ? false , name , nodejs , version-spec } :
                                                                                 config.lazy-shell-application
                                                                                     {
                                                                                         mounts = { pwd = { source = "." ; type = "bind" ; } ; } ;
@@ -36,6 +36,7 @@
                                                                                                         config.tree-serialization.explode
                                                                                                             {
                                                                                                                 bytes = "1M" ;
+                                                                                                                garble = garble ;
                                                                                                                 input = "/mounts/pwd/node_modules" ;
                                                                                                                 name = "explode" ;
                                                                                                                 output = "/mounts/pwd/node_modules.exploded" ;
@@ -59,7 +60,7 @@
                                                                 lib.mkOption
                                                                     {
                                                                         default =
-                                                                            { exploded } :
+                                                                            { exploded , garble ? false } :
                                                                                 pkgs.runCommand
                                                                                     "node-package"
                                                                                     {
@@ -68,6 +69,7 @@
                                                                                                 (
                                                                                                     config.tree-serialization.implode
                                                                                                         {
+                                                                                                            garble = garble ;
                                                                                                             input = "${ exploded }/node_modules.exploded" ;
                                                                                                             name = "implode" ;
                                                                                                             output = "$OUT" ;
